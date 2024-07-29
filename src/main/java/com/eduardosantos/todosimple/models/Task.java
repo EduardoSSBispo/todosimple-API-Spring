@@ -17,10 +17,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table (name = Task.TABLE_NAME)
 public class Task {
-        private static final String TABLE_NAME = "tasks";
+        private static final String TABLE_NAME = "task";
 
         @Id
-        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id", unique = true, nullable = false)
         private Long id;
 

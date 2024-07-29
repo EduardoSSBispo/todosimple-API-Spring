@@ -25,10 +25,10 @@ public class User {
     public interface CreateUser {} //Interface para validação de criação de usuário
     public interface UpdateUser {} //Interface para validação de atualização de usuário
 
-    public static final String TABLE_NAME = "users";
+    public static final String TABLE_NAME = "user";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE) //Gera valores sequenciais no banco (identity do postgres)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Gera valores sequenciais no banco (identity do postgres)
     @Column(name = "id", unique = true, nullable = false) //Verificação de coluna no banco, para criar a tabela
     private Long id;
 
