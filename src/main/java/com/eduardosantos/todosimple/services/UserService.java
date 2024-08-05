@@ -18,7 +18,7 @@ public class UserService {
     private UserRepositories userRepository;
 
 
-    public User findUserById(Long id) {
+    public User findById(Long id) {
         //Optional serve para evitar nullpointerexception
         Optional<User> user = this.userRepository.findById(id);
 
@@ -31,7 +31,7 @@ public class UserService {
     //O Transactional serve para garantir que a operação seja executada com sucesso
     //É bom utilizar em Create e Update, para garantir que vai ser salvo no banco
     @Transactional
-    public User createUser(User user) {
+    public User create(User user) {
         user.setId(null); //Garante que o usuário não tenha um ID
         user = this.userRepository.save(user);
         
@@ -39,9 +39,9 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(User user) {
+    public User update(User user) {
         //Atualizar apenas a senha, pois o username e o ID são identificadores únicos
-        User newUser = findUserById(user.getId());
+        User newUser = findById(user.getId());
         newUser.setPassword(user.getPassword());
 
         return this.userRepository.save(newUser);
@@ -49,7 +49,7 @@ public class UserService {
 
     public void delete(Long id) {
         //Verifica se o usuário existe
-        findUserById(id);
+        findById(id);
 
         //Try catch, pois pode ocorrer um erro ao deletar o usuário por conta de relacionamentos
         try {

@@ -16,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -49,6 +50,7 @@ public class User {
 
     //mappedBy serve para dizer que o mapeamento foi feito na outra classe, uso o nome da variável que está na outra classe
     @OneToMany(mappedBy = "user") //Fazendo o contrário do que foi feito no Task
+    @JsonIgnore //Não permite que o campo seja lido
     private List<Task> tasks = new ArrayList<Task>();
 
 

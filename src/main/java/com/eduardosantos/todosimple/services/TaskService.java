@@ -19,7 +19,7 @@ public class TaskService {
     @Autowired
     private UserService userService;
 
-    public Task findTaskById(Long id) {
+    public Task findById(Long id) {
         Optional<Task> task = this.taskRepository.findById(id);
         
         return task.orElseThrow(() -> new RuntimeException(
@@ -29,7 +29,7 @@ public class TaskService {
 
     @Transactional
     public Task create(Task task) {
-        User user = this.userService.findUserById(task.getUser().getId());
+        User user = this.userService.findById(task.getUser().getId());
 
         task.setId(null);
         task.setUser(user);
@@ -40,13 +40,13 @@ public class TaskService {
 
     @Transactional
     public Task update(Task task) {
-        Task newTask = findTaskById(task.getId());
+        Task newTask = findById(task.getId());
         newTask.setDescription(task.getDescription());
         return this.taskRepository.save(newTask);
     }
 
     public void delete(Long id) {
-        findTaskById(id);
+        findById(id);
 
         try {
             this.taskRepository.deleteById(id);
