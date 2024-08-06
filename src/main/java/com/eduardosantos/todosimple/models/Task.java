@@ -34,6 +34,9 @@ public class Task {
         @Size(min = 1, max = 255)
         private String description;
 
+        public Task() {
+            // Construtor padrão
+        }
         
         public Task(Long id, User user, String description) {
             this.id = id;

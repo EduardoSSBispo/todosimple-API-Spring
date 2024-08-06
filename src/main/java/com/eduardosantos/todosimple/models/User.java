@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Entity
 @Table(name = User.TABLE_NAME)
 public class User {
+    
     public interface CreateUser {} //Interface para validação de criação de usuário
     public interface UpdateUser {} //Interface para validação de atualização de usuário
 
@@ -53,6 +54,9 @@ public class User {
     @JsonIgnore //Não permite que o campo seja lido
     private List<Task> tasks = new ArrayList<Task>();
 
+    public User() {
+        // Construtor padrão
+    }
 
     public User(Long id, String username, String password) {
         this.id = id;

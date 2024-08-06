@@ -23,7 +23,7 @@ import com.eduardosantos.todosimple.models.User.UpdateUser;
 import com.eduardosantos.todosimple.services.UserService;
 
 @RestController
-@RequestMapping("/User") //Delimita o caminho para acessar os métodos
+@RequestMapping("/user") //Delimita o caminho para acessar os métodos
 @Validated //Valida os métodos com base nas anotações que foram feitas nos models (@NotNull, @Size, etc)
 public class UserController {
     
@@ -33,8 +33,8 @@ public class UserController {
     //Métodos para manipulação de usuários
     //Cada método é responsável por uma ação específica
     
-    @GetMapping("/{id}") //Mapeia o método para acessar o ID do usuário
     //ResponseEntity é um objeto que encapsula a resposta HTTP, trata o status code, o corpo da resposta e os headers
+    @GetMapping("/{id}") //Mapeia o método para acessar o ID do usuário
     public ResponseEntity<User> findById(@PathVariable Long id) {
         User user = this.userService.findById(id);
         return ResponseEntity.ok().body(user); //Retorna o usuário encontrado
