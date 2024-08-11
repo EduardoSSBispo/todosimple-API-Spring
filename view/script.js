@@ -12,7 +12,7 @@ function show(tasks) {
             <th scope="col">User ID</th>
         </thead>`;
 
-    for(let task of tasks) {
+    for (let task of tasks) {
         tab += `
             <tr>
                 <td scope="row">${task.id}</td>
@@ -29,11 +29,11 @@ function show(tasks) {
 
 
 async function getAPI(url) {
-    const response = await fetch(url, {method: "GET"});
+    const response = await fetch(url, { method: "GET" });
 
     var data = await response.json();
     console.log(data);
-    
+
     if (response) hideLoader();
 
     show(data);

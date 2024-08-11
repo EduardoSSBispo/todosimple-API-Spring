@@ -13,7 +13,7 @@ import com.eduardosantos.todosimple.repositories.TaskRepositories;
 
 @Service
 public class TaskService {
-    
+
     @Autowired
     private TaskRepositories taskRepository;
 
@@ -22,10 +22,9 @@ public class TaskService {
 
     public Task findById(Long id) {
         Optional<Task> task = this.taskRepository.findById(id);
-        
+
         return task.orElseThrow(() -> new RuntimeException(
-            "Tarefa com o ID:" + id + " não encontrada! Tipo: " + Task.class.getName()
-        ));
+                "Tarefa com o ID:" + id + " não encontrada! Tipo: " + Task.class.getName()));
     }
 
     public List<Task> findAllByUserId(Long userId) {

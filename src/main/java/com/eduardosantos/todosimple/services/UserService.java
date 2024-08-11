@@ -17,30 +17,28 @@ public class UserService {
     @Autowired
     private UserRepositories userRepository;
 
-
     public User findById(Long id) {
-        //Optional serve para evitar nullpointerexception
+        // Optional serve para evitar nullpointerexception
         Optional<User> user = this.userRepository.findById(id);
 
-        //Se o user estiver nulo, lança uma exceção
+        // Se o user estiver nulo, lança uma exceção
         return user.orElseThrow(() -> new RuntimeException(
-            "Usuário com o ID:" + id + " não encontrado! Tipo: " + User.class.getName()
-        ));
+                "Usuário com o ID:" + id + " não encontrado! Tipo: " + User.class.getName()));
     }
 
-    //O Transactional serve para garantir que a operação seja executada com sucesso
-    //É bom utilizar em Create e Update, para garantir que vai ser salvo no banco
+    // O Transactional serve para garantir que a operação seja executada com sucesso
+    // É bom utilizar em Create e Update, para garantir que vai ser salvo no banco
     @Transactional
     public User create(User user) {
-        user.setId(null); //Garante que o usuário não tenha um ID
+        user.setId(null); // Garante que o usuário não tenha um ID
         user = this.userRepository.save(user);
-        
+
         return user;
     }
 
     @Transactional
     public User update(User user) {
-        //Atualizar apenas a senha, pois o username e o ID são identificadores únicos
+        // Atualizar apenas a senha, pois o username e o ID são identificadores únicos
         User newUser = findById(user.getId());
         newUser.setPassword(user.getPassword());
 
@@ -48,12 +46,13 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        //Verifica se o usuário existe
+        // Verifica se o usuário existe
         findById(id);
 
-        //Try catch, pois pode ocorrer um erro ao deletar o usuário por conta de relacionamentos
+        // Try catch, pois pode ocorrer um erro ao deletar o usuário por conta de
+        // relacionamentos
         try {
-            this.userRepository.deleteById(id);   
+            this.userRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Não foi possível deletar o usuário com ID: " + id);
         }

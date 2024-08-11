@@ -15,85 +15,85 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table (name = Task.TABLE_NAME)
+@Table(name = Task.TABLE_NAME)
 public class Task {
-        private static final String TABLE_NAME = "task";
+    private static final String TABLE_NAME = "task";
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", unique = true, nullable = false)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-        @ManyToOne //Muitas tarefas para um usuário, para o banco
-        @JoinColumn(name = "user_id", nullable = false, updatable = false) //Realizar join entre usuário e tarefa
-        private User user;
+    @ManyToOne // Muitas tarefas para um usuário, para o banco
+    @JoinColumn(name = "user_id", nullable = false, updatable = false) // Realizar join entre usuário e tarefa
+    private User user;
 
-        @Column(name = "description", nullable = false, length = 255)
-        @NotNull
-        @NotEmpty
-        @Size(min = 1, max = 255)
-        private String description;
+    @Column(name = "description", nullable = false, length = 255)
+    @NotNull
+    @NotEmpty
+    @Size(min = 1, max = 255)
+    private String description;
 
-        public Task() {
-            // Construtor padrão
-        }
-        
-        public Task(Long id, User user, String description) {
-            this.id = id;
-            this.user = user;
-            this.description = description;
-        }
+    public Task() {
+        // Construtor padrão
+    }
 
-        public Long getId() {
-            return id;
-        }
+    public Task(Long id, User user, String description) {
+        this.id = id;
+        this.user = user;
+        this.description = description;
+    }
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public User getUser() {
-            return user;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public void setUser(User user) {
-            this.user = user;
-        }
+    public User getUser() {
+        return user;
+    }
 
-        public String getDescription() {
-            return description;
-        }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public String getDescription() {
+        return description;
+    }
 
-        @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
     public boolean equals(Object obj) {
-        if (this == obj){
+        if (this == obj) {
             return true;
         }
 
-        if (obj == null){
+        if (obj == null) {
             return true;
         }
 
-        if(!(obj instanceof Task)){
+        if (!(obj instanceof Task)) {
             return false;
         }
 
         Task other = (Task) obj;
-        if(this.id ==null){
-            if(other.id != null){
+        if (this.id == null) {
+            if (other.id != null) {
                 return false;
             }
-        } else if (!this.id.equals(other.id)){
+        } else if (!this.id.equals(other.id)) {
             return false;
         }
 
-        return Objects.equals(this.id, other.id) && 
-               Objects.equals(this.user, other.user) && 
-               Objects.equals(this.description, other.description);
+        return Objects.equals(this.id, other.id) &&
+                Objects.equals(this.user, other.user) &&
+                Objects.equals(this.description, other.description);
     }
 
     @Override

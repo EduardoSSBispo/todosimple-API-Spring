@@ -26,7 +26,7 @@ import com.eduardosantos.todosimple.services.UserService;
 @RequestMapping("/task")
 @Validated
 public class TaskController {
-    
+
     @Autowired
     private TaskService taskService;
 
